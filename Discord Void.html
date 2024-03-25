@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Void</title>
+    <!-- icon -->
+    <link rel="icon" href="https://files.catbox.moe/cwx57i.ico" type="image/x-icon">
+    <!-- iOS -->
+    <link rel="apple-touch-icon" href="https://files.catbox.moe/0fgdkf.png">
+    <style>
+        /* Your CSS styles */
+    </style>
+</head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Void</title>
+    <style>
+        html {
+            cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABhSURBVHjazJMxDsAwCANzVf//ZXcJQ6MSHLGUMZFPxhZIGp25RnPagDt5j70A3h/LyqmDKVSV0XYFB1JmUEGsEHcQu4WAuC1kyXPkIIRrlRZgiqlqxLwFfdk/CZH/HtMzANS0KBXx1OxTAAAAAElFTkSuQmCC"), default;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: auto;
+            background: #131313;
+            color: #bdbcf7;
+            font-size: 42px;
+            font-family: 'Fira Mono', monospace;
+            letter-spacing: 0px;
+        }
+
+        .center {
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2vh;
+        }
+
+        .lower {
+            height: auto;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: -1px;
+            font-size: 15px;
+        }
+
+        p {
+            color: #bdbcf7;
+            font-size: 14px;
+            letter-spacing: 0px;
+            font-family: 'Fira Mono', monospace;
+        }
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: auto;
+        }
+
+        .ontop {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: auto;
+            font-size: 6px;
+        }
+
+        .form-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            width: 300px;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #bdbcf7;
+            border-radius: 5px;
+            background-color: #1f1f1f;
+            color: #bdbcf7;
+            font-size: 16px;
+            transition: filter 0.3s ease;
+        }
+
+        .form-input:not(:hover):not(textarea):not(button) {
+            filter: blur(2px);
+        }
+
+        .form-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #8e8dff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-button:hover {
+            background-color: #6b6bff;
+        }
+
+        /* Added styles */
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .message-container .form-input,
+        .message-container .form-button {
+            width: 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <div id="animate" title="void" class="center">
+        Discord Void
+    </div>
+
+    <div id="animate" class="lower">
+        <p>made by xlf - https://feds.lol/xlf</p>
+    </div>
+
+    <div class="form-container">
+        <form id="discord-form">
+            <div class="message-container">
+                <label class="form-label" for="webhook-url">Webhook URL:</label>
+                <input class="form-input" type="text" id="webhook-url" name="webhook-url" required>
+            </div>
+            <div class="message-container">
+                <label class="form-label" for="message">Message:</label>
+                <textarea class="form-input" id="message" name="message" rows="4" required></textarea>
+                <button class="form-button" type="submit">Send Message</button>
+            </div>
+        </form>
+    </div>
+	
+    <footer>
+        <p>© 2024 void industries - all rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('discord-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const webhookURL = document.getElementById('webhook-url').value;
+            const message = document.getElementById('message').value;
+
+            fetch(webhookURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ content: message })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to send message');
+                    }
+                    alert('Message sent successfully!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to send message');
+                });
+        });
+    </script>
+</body>
+
+</html>
